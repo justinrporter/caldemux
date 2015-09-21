@@ -37,7 +37,12 @@ router.get('/caldemux/:subcal/:calurl', function(req, res, next) {
         }
       }
 
-      var muxed_cal = header+events.join("END:VEVENT")+"END:VEVENT"
+      var muxed_cal = ""
+      if(events[0].indexOf(header) >= 0){
+        muxed_cal = events.join("END:VEVENT")+"END:VEVENT"
+      }else {
+        muxed_cal = header+events.join("END:VEVENT")+"END:VEVENT"
+      }
 
       res.send(muxed_cal)
       console.log(muxed_cal)
