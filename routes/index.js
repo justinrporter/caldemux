@@ -19,6 +19,7 @@ router.get('/caldemux/:subcal/:calurl', function(req, res, next) {
       rawcal += d
     });
     subres.on('end', function(){
+      header = rawcal.slice(0, rawcal.indexOf("BEGIN:VEVENT"))
       rawevents = rawcal.split("END:VEVENT")
 
       var events = []
@@ -36,7 +37,7 @@ router.get('/caldemux/:subcal/:calurl', function(req, res, next) {
         }
       }
 
-      var muxed_cal = events.join("END:VEVENT")+"END:VEVENT"
+      var muxed_cal = header+events.join("END:VEVENT")+"END:VEVENT"
 
       res.send(muxed_cal)
       console.log(muxed_cal)
