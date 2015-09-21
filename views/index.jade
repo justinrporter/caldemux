@@ -1,5 +1,10 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  h1 CalDeMux
+  p Welcome to caldemux! We separate out your calendars using the tags in the event titles.
+  p Here's how it works. For now, you'll need to assemble the URL yourself, because it's extra work for me to write something to do it for you.
+  ol
+    li Find your canvas URL. It should look something like this: https://canvas.wustl.edu/feeds/calendars/user_SomeGarbBBBageSTUFF.ics. You'll want *just* the user_SomeGarbBBBageSTUFF bit.
+    li Find the tag for the class you want to extract. They usually look something like this: [Particle Physics 16-17]. For use on caldemux, you'll need to get rid of the spaces and ditch the square braces for something that looks like "ParticlePhysics16-17".
+    li Combine the subcalander and your specific calendar ID like so: https://infinite-spire-8363.herokuapp.com/caldemux/[TAG]/[id]. For the examples I gave, it'll look like https://infinite-spire-8363.herokuapp.com/caldemux/ParticlePhysics16-17/user_SomeGarbBBBageSTUFF
