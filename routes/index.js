@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
-router.get('/caldemux/:subcal/:calurl', function(req, res, next) {
+router.get('/:subcal/:calurl', function(req, res, next) {
 
   var subreq = https.get("https://canvas.wustl.edu/feeds/calendars/"+req.params.calurl+".ics", function(subres) {
 
