@@ -45,7 +45,6 @@ router.get('/caldemux/:subcal/:calurl', function(req, res, next) {
       }
 
       res.send(muxed_cal)
-      console.log(muxed_cal)
     })
     subres.on('error', function(e){
       console.error(e)
