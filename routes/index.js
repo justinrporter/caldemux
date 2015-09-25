@@ -38,10 +38,15 @@ router.get('/:subcal/:calurl', function(req, res, next) {
       }
 
       var muxed_cal = ""
-      if(events[0].indexOf(header) >= 0){
-        muxed_cal = events.join("END:VEVENT")+"END:VEVENT"
-      }else {
-        muxed_cal = header+events.join("END:VEVENT")+"END:VEVENT"
+
+      // check that there are events with this tag.
+      if(events.length > 0){
+        // if the first event doesn't include a header, add the header.
+        if(events[0].indexOf(header) >= 0){
+          muxed_cal = events.join("END:VEVENT")+"END:VEVENT"
+        }else {
+          muxed_cal = header+events.join("END:VEVENT")+"END:VEVENT"
+        }
       }
 
       res.send(muxed_cal)
