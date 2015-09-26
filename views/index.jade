@@ -2,15 +2,21 @@ extends layout
 
 block content
   div(class="container")
-    h3 Split your canvas calendar into individual classes:
+    h2 Reducing Noise on the Calendar
+    p So, I got pretty sick of having all my classes as one calendar, compelete with student groups everywere. So I took matters into my own hands. This is a stupid-simple web app that splits out your Canvas calendar into multiple calendars based upon the little tags in the titles (like "[Particle Physics]") that tell you which class it belongs to. I think it's great, but YMMV.  
 
-    div(ng-controller="ExampleController")
+    p Here's how it works:
+
+    div(ng-controller="ExampleController" class="container")
       div(class="form-group")
         label(for="canvasURL") Canvas Calendar URL:
+        p(class="help-block") Your <em>Canvas</em> calendar, not your Oasis calendar. Unsurprisingly, it should start with "canvas.wustl.edu".
         input(type="text" ng-model="url" id="canvasURL" class="form-control" placeholder="https://canvas.wustl.edu/feeds/calendars/user_D78OvTin2WewjQSy8uKZqlintfu2yWhayuspDRbF.ics")
       div(class="form-group") 
         label(for="calTag") Calendar Tag:
+        p(class="help-block") Every event has a tag (<em>e.g.</em> "[Hearts and Lungs and Stuff 15-16]") that tells you which class it's from. Cut and paste that here.
         input(type="text" ng-model="tag" id="calTag" class="form-control" placeholder="[Particle Physics 15-16]")
 
-      p(class="lead") Thine link appeareth hereabouts:
+      p() <strong>Your link will be built below:</strong>
+      p(class="text-muted") First, click on it to make sure it produces some stuff. If it does, cut and paste the link into iCal, Google Calendar, etc.
       a(href="{{produce_url(url, tag)}}") {{produce_url(url, tag)}}
