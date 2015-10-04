@@ -11,7 +11,16 @@ router.get('/', function(req, res, next) {
 
 router.get('/:subcal/:calurl', function(req, res, next) {
 
-  var subreq = https.get("https://canvas.wustl.edu/feeds/calendars/"+req.params.calurl+".ics", function(subres) {
+  // We want to be permissive about the way we parse URLs, allowing both with and without *.ics
+  var canvas_url = "https://canvas.wustl.edu/feeds/calendars/"+req.params.calurl
+  console.log(canvas_url.slice(-4))
+  if( !(canvas_url.slice(-4) === ".ics") ){
+    canvas_url += ".ics"
+  }
+
+  console.log(canvas_url)
+
+  var subreq = https.get(canvas_url, function(subres) {
 
     var rawcal = ''
 
