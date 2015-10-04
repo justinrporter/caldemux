@@ -47,6 +47,8 @@ router.get('/:subcal/:calurl', function(req, res, next) {
         }else {
           muxed_cal = header+events.join("END:VEVENT")+"END:VEVENT"
         }
+
+        muxed_cal += "\nEND:VCALENDAR"
       }
 
       res.send(muxed_cal)
