@@ -19,6 +19,8 @@ router.get('/:subcal/:calurl', function(req, res, next) {
       rawcal += d
     });
     subres.on('end', function(){
+      rawcal = rawcal.replace(/\r\n/g, '\n')
+
       header = rawcal.slice(0, rawcal.indexOf("BEGIN:VEVENT"))
       rawevents = rawcal.split("END:VEVENT")
 
