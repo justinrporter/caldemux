@@ -48,9 +48,11 @@ router.get('/:subcal/:calurl', function(req, res, next) {
           muxed_cal = header+events.join("END:VEVENT")+"END:VEVENT"
         }
 
-        muxed_cal += "\nEND:VCALENDAR"
+        muxed_cal += "\r\nEND:VCALENDAR"
       }
 
+      res.setHeader('content-type', 'text/calendar');
+      // maybe also Content-Disposition:inline;filename=my_ical.ics?
       res.send(muxed_cal)
     })
     subres.on('error', function(e){
