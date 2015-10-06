@@ -3,6 +3,7 @@ extends layout
 block content
   div(class="container")
     h2 Reducing Noise on the Calendar
+    h5(class="text-danger") Currently broken for Google Calendar :' (
     p So, I got pretty sick of having all my classes as one calendar, compelete with student groups everywere. So I took matters into my own hands. This is a stupid-simple web app that splits out your Canvas calendar into multiple calendars based upon the little tags in the titles (like "[Particle Physics]") that tell you which class it belongs to. I think it's great, but YMMV.  
 
     p Here's how it works:
@@ -20,5 +21,5 @@ block content
         input(type="text" ng-model="tag" id="calTag" class="form-control" placeholder="[Particle Physics 15-16]")
 
       p <strong>Your link will be built below:</strong>
-      p(class="text-muted") First, click on it to make sure it produces some stuff. If it does, cut and paste the link into iCal, Google Calendar, etc. (Proviso: some people have had trouble with Google Calendar links, but I don't know why yet...)
+      p(class="text-muted") First, click on it to make sure it produces some stuff. If it does, cut and paste the link into iCal, Outlook, etc. (Proviso: some people have had trouble with Google Calendar links, but I don't know why yet...)
       a(href="{{produce_url(url, tag)}}") {{produce_url(url, tag)}}
