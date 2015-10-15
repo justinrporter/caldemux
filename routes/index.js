@@ -13,12 +13,9 @@ router.get('/:subcal/:calurl', function(req, res, next) {
 
   // We want to be permissive about the way we parse URLs, allowing both with and without *.ics
   var canvas_url = "https://canvas.wustl.edu/feeds/calendars/"+req.params.calurl
-  console.log(canvas_url.slice(-4))
   if( !(canvas_url.slice(-4) === ".ics") ){
     canvas_url += ".ics"
   }
-
-  console.log(canvas_url)
 
   var subreq = https.get(canvas_url, function(subres) {
 
@@ -28,6 +25,18 @@ router.get('/:subcal/:calurl', function(req, res, next) {
       rawcal += d
     });
     subres.on('end', function(){
+
+      // Strip all [Edit Event] links.
+      rmstr = "[Edit Event]"
+      for(var i = 1; i <= rmstr.length - 1; i++){
+        search_str = rmstr.slice(0, i) + "\r\n " + rmstr.slice(i)
+        while(rawcal.indexOf("[Edit Event]") != -1){
+          begin = rawcal.indexOf("[Edit Event]");
+          rawcal = rawcal.slice(0, begin)+rawcal.slice(rawcal.indexOf(")\r\n", begin)+3);
+        }
+      }
+      // rawcal = rawcal.replace(/\[Edit Event\]\(https?:\/\/([^\s]|[\r\n ])+\)/g, "")
+
       header = rawcal.slice(0, rawcal.indexOf("BEGIN:VEVENT"))
       rawevents = rawcal.split("END:VEVENT")
 
