@@ -32,9 +32,15 @@ router.get('/:subcal/:calurl', function(req, res, next) {
         search_str = rmstr.slice(0, i) + "\r\n " + rmstr.slice(i)
         while(rawcal.indexOf("[Edit Event]") != -1){
           begin = rawcal.indexOf("[Edit Event]");
-          rawcal = rawcal.slice(0, begin)+rawcal.slice(rawcal.indexOf(")\r\n", begin)+3);
+          rawcal = rawcal.slice(0, begin)+rawcal.slice(rawcal.indexOf(")", begin)+3);
         }
       }
+
+      rawcal = rawcal.replace(/\\n\\nDTEND/g, "\r\nDTEND")
+      // console.log("\\n\\nDTEND")
+      // while(rawcal.indexOf("\n\nDTEND") != -1){
+      //   rawcal = rawcal.replace("\n\nDTEND", "\r\nDTEND")
+      // }
       // rawcal = rawcal.replace(/\[Edit Event\]\(https?:\/\/([^\s]|[\r\n ])+\)/g, "")
 
       header = rawcal.slice(0, rawcal.indexOf("BEGIN:VEVENT"))
