@@ -36,12 +36,19 @@ router.get('/:subcal/:calurl', function(req, res, next) {
         }
       }
 
+      // the above code sometimes contracts DTEND lines into description.
+      // this puts them back.
       rawcal = rawcal.replace(/\\n\\nDTEND/g, "\r\nDTEND")
-      // console.log("\\n\\nDTEND")
-      // while(rawcal.indexOf("\n\nDTEND") != -1){
-      //   rawcal = rawcal.replace("\n\nDTEND", "\r\nDTEND")
-      // }
-      // rawcal = rawcal.replace(/\[Edit Event\]\(https?:\/\/([^\s]|[\r\n ])+\)/g, "")
+
+      // the above solution is incomplete. This is getting super ugly and there
+      // must be a better solution, but here we are. The regex below seems like it
+      // shoudl work but it doesn't so I just make all the combos I observe.
+      // rawcal = rawcal.replace(/^([n]|[ ]|[\\])+DTEND/g, "DTEND")
+      rawcal = rawcal.replace(/ n\\nDTEND/g, "DTEND")
+      rawcal = rawcal.replace(/ \\nDTEND/g, "DTEND")
+      rawcal = rawcal.replace(/ nDTEND/g, "DTEND")
+      rawcal = rawcal.replace(/ DTEND/g, "DTEND")
+
 
       header = rawcal.slice(0, rawcal.indexOf("BEGIN:VEVENT"))
       rawevents = rawcal.split("END:VEVENT")
