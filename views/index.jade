@@ -3,7 +3,7 @@ extends layout
 block content
   div(class="container")
     h2 Reducing Noise on the Calendar
-    p So, I got pretty sick of having all my classes as one calendar, compelete with student groups everywere. So I took matters into my own hands. This is a stupid-simple web app that splits out your Canvas calendar into multiple calendars based upon the little tags in the titles (like "[Particle Physics]") that tell you which class it belongs to. I think it's great, but YMMV.  
+    p My small brain turns out not to be capable of handling the full Canvas calendar, what with student groups everywere and whatnot. To solve that problem, this is a stupid-simple web app that splits out your Canvas calendar into multiple calendars based upon the little tags in the titles (like "[Particle Physics]") that tell you which class it belongs to. I think it's great, but YMMV. 
 
     p Here's how it works:
 
@@ -19,7 +19,6 @@ block content
         p(class="text-warning") Common tags include: <strong>[Renal and Genitourinary 15-16]</strong>, <strong>[Pulmonary 15-16]</strong>, <strong>[Pediatrics 15-16]</strong>, <strong>[Pathology 15-16]</strong>, <strong>[Prac of Med II 15-16]</strong>
 
         input(type="text" ng-model="tag" id="calTag" class="form-control" placeholder="[Particle Physics 15-16]")
-        input()
 
       p <strong>Your link will be built below:</strong>
       p(class="text-muted") Cut and paste the link into iCal, Outlook, <em>etc.</em>
