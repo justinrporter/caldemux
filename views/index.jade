@@ -7,18 +7,20 @@ block content
 
     p Here's how it works:
 
-    div(ng-controller="ExampleController" class="container")
+    div(ng-controller="UrlBuilderController" class="container")
       div(class="form-group")
         label(for="canvasURL") Canvas Calendar URL:
         p(class="help-block") Your <em>Canvas</em> calendar, not your Oasis calendar. Unsurprisingly, it should start with "canvas.wustl.edu".
         input(type="text" ng-model="url" id="canvasURL" class="form-control" placeholder="https://canvas.wustl.edu/feeds/calendars/user_D78OvTin2WewjQSy8uKZqlintfu2yWhayuspDRbF.ics")
+
       div(class="form-group") 
         label(for="calTag") Calendar Tag:
-        p(class="help-block") Every event has a tag (<em>e.g.</em> "[Hearts and Lungs and Stuff 15-16]") that tells you which class it's from. Cut and paste that here.
+        p(class="help-block") Every event has a tag (<em>e.g.</em> "[Hearts and Lungs and Stuff 15-16]") that tells you which class it's from. They're found in the titles of the relevant events in your un-split Canvas calendar. Cut and paste from there below:
         p(class="text-warning") Common tags include: <strong>[Renal and Genitourinary 15-16]</strong>, <strong>[Pulmonary 15-16]</strong>, <strong>[Pediatrics 15-16]</strong>, <strong>[Pathology 15-16]</strong>, <strong>[Prac of Med II 15-16]</strong>
 
         input(type="text" ng-model="tag" id="calTag" class="form-control" placeholder="[Particle Physics 15-16]")
+        input()
 
       p <strong>Your link will be built below:</strong>
-      p(class="text-muted") First, click on it to make sure it produces some stuff. If it does, cut and paste the link into iCal, Outlook, etc. (Proviso: some people have had trouble with Google Calendar links, but I don't know why yet...)
-      a(href="{{produce_url(url, tag)}}") {{produce_url(url, tag)}}
+      p(class="text-muted") Cut and paste the link into iCal, Outlook, <em>etc.</em>
+      a {{produce_url(url, tag)}}
