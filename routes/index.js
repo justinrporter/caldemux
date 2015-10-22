@@ -9,6 +9,34 @@ router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
 
+var suggest_tags = function(rawcal){
+}
+
+var strip_edit_event = function(rawcal){
+  // Strip all [Edit Event] links.
+  // rmstr = "[Edit Event]"
+  // for(var i = 1; i <= rmstr.length - 1; i++){
+  //   search_str = rmstr.slice(0, i) + "\r\n " + rmstr.slice(i)
+  //   while(rawcal.indexOf("[Edit Event]") != -1){
+  //     begin = rawcal.indexOf("[Edit Event]");
+  //     rawcal = rawcal.slice(0, begin)+rawcal.slice(rawcal.indexOf(")", begin)+3);
+  //   }
+  // }
+
+  // the above code sometimes contracts DTEND lines into description.
+  // this puts them back.
+  // rawcal = rawcal.replace(/\\n\\nDTEND/g, "\r\nDTEND")
+
+  // the above solution is incomplete. This is getting super ugly and there
+  // must be a better solution, but here we are. The regex below seems like it
+  // shoudl work but it doesn't so I just make all the combos I observe.
+  // rawcal = rawcal.replace(/^([n]|[ ]|[\\])+DTEND/g, "DTEND")
+  // rawcal = rawcal.replace(/ n\\nDTEND/g, "DTEND")
+  // rawcal = rawcal.replace(/ \\nDTEND/g, "DTEND")
+  // rawcal = rawcal.replace(/ nDTEND/g, "DTEND")
+  // rawcal = rawcal.replace(/ DTEND/g, "DTEND")
+}
+
 router.get('/:subcal/:calurl', function(req, res, next) {
 
   // We want to be permissive about the way we parse URLs, allowing both with and without *.ics
@@ -25,30 +53,6 @@ router.get('/:subcal/:calurl', function(req, res, next) {
       rawcal += d
     });
     subres.on('end', function(){
-
-      // Strip all [Edit Event] links.
-      rmstr = "[Edit Event]"
-      for(var i = 1; i <= rmstr.length - 1; i++){
-        search_str = rmstr.slice(0, i) + "\r\n " + rmstr.slice(i)
-        while(rawcal.indexOf("[Edit Event]") != -1){
-          begin = rawcal.indexOf("[Edit Event]");
-          rawcal = rawcal.slice(0, begin)+rawcal.slice(rawcal.indexOf(")", begin)+3);
-        }
-      }
-
-      // the above code sometimes contracts DTEND lines into description.
-      // this puts them back.
-      rawcal = rawcal.replace(/\\n\\nDTEND/g, "\r\nDTEND")
-
-      // the above solution is incomplete. This is getting super ugly and there
-      // must be a better solution, but here we are. The regex below seems like it
-      // shoudl work but it doesn't so I just make all the combos I observe.
-      // rawcal = rawcal.replace(/^([n]|[ ]|[\\])+DTEND/g, "DTEND")
-      rawcal = rawcal.replace(/ n\\nDTEND/g, "DTEND")
-      rawcal = rawcal.replace(/ \\nDTEND/g, "DTEND")
-      rawcal = rawcal.replace(/ nDTEND/g, "DTEND")
-      rawcal = rawcal.replace(/ DTEND/g, "DTEND")
-
 
       header = rawcal.slice(0, rawcal.indexOf("BEGIN:VEVENT"))
       rawevents = rawcal.split("END:VEVENT")
