@@ -7,11 +7,13 @@ block content
 
     p Here's how it works:
 
-    div(ng-controller="UrlBuilderController" class="container")
+    form(ng-controller="UrlBuilderController" class="container" name="calInfo")
       div(class="form-group")
         label(for="canvasURL") Canvas Calendar URL:
-        p(class="help-block") Your <em>Canvas</em> calendar, not your Oasis calendar. Unsurprisingly, it should start with "canvas.wustl.edu".
-        input(type="text" ng-model="url" id="canvasURL" class="form-control" placeholder="https://canvas.wustl.edu/feeds/calendars/user_D78OvTin2WewjQSy8uKZqlintfu2yWhayuspDRbF.ics")
+        p(class="help-block" ng-hide="calInfo.$error.url") Your <em>Canvas</em> calendar feed, not your Oasis calendar (and not your Canvas calendar webapp URL). Unsurprisingly, it should start with "canvas.wustl.edu", and will end it ".ics" because it's a calendar file.
+        p(class="text-danger" ng-show="calInfo.$error.url[0].$error.url") "{{calInfo.$error.url[0].$viewValue}}" doesn't look like a valid URL...
+
+        input(type="url" ng-model="url" id="canvasURL" class="form-control" placeholder="https://canvas.wustl.edu/feeds/calendars/user_D78OvTin2WewjQSy8uKZqlintfu2yWhayuspDRbF.ics")
 
       div(class="form-group") 
         label(for="calTag") Calendar Tag:
