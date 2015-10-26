@@ -56,6 +56,7 @@ router.get('/:subcal/:calurl', function(req, res, next) {
 
       header = rawcal.slice(0, rawcal.indexOf("BEGIN:VEVENT"))
       rawevents = rawcal.split("END:VEVENT")
+      PROC_REGEXP = /[ \/]/g;
 
       var events = []
 
@@ -65,9 +66,10 @@ router.get('/:subcal/:calurl', function(req, res, next) {
                                        this_event.indexOf("UID:"))
 
         var tag = summary.slice(summary.indexOf('[')+1, summary.indexOf(']'))
-        tag = tag.replace(/ /g, '')
+        tag = tag.replace(PROC_REGEXP, '')
 
-        if (tag == req.params.subcal.replace(/ /g, '')){
+        // strip spaces and slashes b/c they interfere w/ URLs
+        if (tag == req.params.subcal.replace(PROC_REGEXP, '')){
           events.push(rawevents[i])
         }
       }

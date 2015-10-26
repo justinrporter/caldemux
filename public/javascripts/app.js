@@ -10,7 +10,9 @@ angular.module('myApp', ['ui.bootstrap'])
 
       if(canvas_url && tag){
         var canvas_uuid = canvas_url.slice(canvas_url.lastIndexOf('/')+1, canvas_url.indexOf('.ics'))
-        var processed_tag = tag.replace(/ /g, '').replace('[', '').replace(']', '')
+        // strip '[', ']', '/', and ' ' from the tag. '[' and ']' are implied,
+        // and ' ' and '/' interfere with URLs
+        var processed_tag = tag.replace(/[ \/]/g, '').replace('[', '').replace(']', '')
         return "https://wustl-caldemux.herokuapp.com/"+processed_tag+'/'+canvas_uuid
       }
     }
