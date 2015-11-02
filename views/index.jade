@@ -5,6 +5,8 @@ block content
     h2 Reducing Noise on the Calendar
     p My small brain turns out not to be capable of handling the full Canvas calendar, what with student groups everywere and whatnot. To solve that problem, this is a stupid-simple web app that splits out your Canvas calendar into multiple calendars based upon the little tags in the titles (like "[Particle Physics]") that tell you which class it belongs to. I think it's great, but YMMV. 
 
+    p You can find the code on #[a(href="//github.com/justinrporter/caldemux") GitHub].
+
     p Here's how it works:
 
     form(ng-controller="UrlBuilderController" class="container" name="calInfo")
@@ -18,7 +20,7 @@ block content
       div(class="form-group") 
         label(for="calTag") Calendar Tag:
         p(class="help-block") Every event has a tag (<em>e.g.</em> "[Hearts and Lungs and Stuff 15-16]") that tells you which class it's from. They're found in the titles of the relevant events in your un-split Canvas calendar. Cut and paste from there below. <em> Note that the Canvas webapp has a different set of tags from the Canvas calendar feed; check your Canvas <strong>feed</strong> to make sure you have the right tags.
-        p(class="text-warning") Common tags include: <strong>[Renal and Genitourinary 15-16]</strong>, <strong>[Pulmonary 15-16]</strong>, <strong>[Pediatrics 15-16]</strong>, <strong>[Pathology 15-16]</strong>, <strong>[Prac of Med II 15-16]</strong>
+        p(class="text-warning") Common tags include: <strong>[Gastrointestinal 15-16]</strong>, <strong>[Endocrinology 15-16]</strong>, <strong>[Dermatology 15-16]</strong>, <strong>[Pediatrics 15-16]</strong>, <strong>[Pathology 15-16]</strong>, <strong>[Prac of Med II 15-16]</strong>
 
         input(type="text" ng-model="tag" id="calTag" class="form-control" placeholder="[Particle Physics 15-16]")
 
